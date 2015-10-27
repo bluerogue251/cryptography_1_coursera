@@ -59,9 +59,19 @@ end
 # spaces_in_ct_6 = [40, 72, 104, 152, 176, 312, 352, 408, 440, 528, 552, 584, 632, 680, 704, 752, 784, 832, 864, 896]
 # spaces_in_ct_7 = [16, 48, 80, 160, 208, 240, 304, 368, 392, 408, 456, 488, 512, 552, 584, 656, 696, 744, 784, 816, 960]
 # spaces_in_ct_8 = [8, 80, 120, 128, 216, 272, 280, 328, 344, 440, 496, 512, 592, 624, 712, 776, 856]
-spaces_in_ct_9 = [32, 96, 232, 248, 264, 272, 288, 360, 416, 440, 472, 504, 528, 536, 600, 616, 632, 696, 744, 752]
+# spaces_in_ct_9 = [32, 96, 232, 248, 264, 272, 288, 360, 416, 440, 472, 504, 528, 536, 600, 616, 632, 696, 744, 752]
 
-spaces_in_ct_9.each do |s|
-  e = s + 7
-  puts "#{s}: #{u.bta(u.xor(target_ciphertext[s..e], source_ciphertexts[9][s..e]))}"
+# spaces_in_ct_9.each do |s|
+#   e = s + 7
+#   puts "#{s}: #{u.bta(u.xor(target_ciphertext[s..e], source_ciphertexts[9][s..e]))}"
+# end
+
+def target_plaintext
+  'The secret message is: When using a stream cipher, never use the key more than once.'
 end
+
+def key
+  u.xor_ss(target_ciphertext, u.atb(target_plaintext))
+end
+
+puts u.bta(u.xor_ss(key, source_ciphertexts[4]))
